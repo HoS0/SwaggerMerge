@@ -1,4 +1,4 @@
-# HoSCom
+# swagger-merge
 
 merging multiple swagger 2.0 JSONs into one JSON
 
