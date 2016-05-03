@@ -1,0 +1,148 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.1.1",
+        "title": "User service",
+        "description": "User Management and Authentication service"
+    },
+    "host": "test.com",
+    "basePath": "/user",
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/users": {
+            "get": {
+                "parameters": [{
+                    "name": "limit",
+                    "in": "query",
+                    "description": "number of users to return",
+                    "type": "integer",
+                    "default": 1000,
+                    "minimum": 100,
+                    "maximum": 10000
+                }],
+                "responses": {
+                    "200": {
+                        "description": "List all users",
+                        "schema": {
+                            "title": "Users",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "parameters": [{
+                    "name": "user",
+                    "in": "body",
+                    "description": "The user JSON you want to post",
+                    "schema": {
+                        "$ref": "#/definitions/NewUser"
+                    },
+                    "required": true
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Make a new User"
+                    }
+                }
+            }
+        },
+        "/user/{userId}": {
+            "get": {
+                "parameters": [{
+                    "name": "userId",
+                    "in": "path",
+                    "type": "string",
+                    "description": "ID of the user",
+                    "required": true
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Sends the user with userId",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "parameters": [{
+                    "name": "userId",
+                    "in": "path",
+                    "type": "string",
+                    "description": "ID of the user",
+                    "required": true
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Updates the user",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "parameters": [{
+                    "name": "userId",
+                    "in": "path",
+                    "type": "string",
+                    "description": "ID of the user",
+                    "required": true
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Deletes the user",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "type": "object",
+            "properties": {
+                "firstname": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "Id": {
+                    "type": "string"
+                }
+            }
+        },
+        "NewUser": {
+            "type": "object",
+            "properties": {
+                "firstname": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

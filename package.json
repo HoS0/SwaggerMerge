@@ -1,0 +1,35 @@
+{
+  "name": "swagger-merge",
+  "version": "0.0.0",
+  "description": "merging multiple swagger 2.0 JSONs into one JSON.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HoS0/SwaggerMerge.git"
+  },
+  "keywords": [
+    "HoS",
+    "swagger",
+    "merge",
+    "JSON"
+  ],
+  "author": "Ali Khoramshahi <al_kh31@yahoo.com> (al-kh.me)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HoS0/SwaggerMerge"
+  },
+  "homepage": "https://github.com/HoS0/SwaggerMerge#readme",
+  "dependencies": {
+    "swagger2-utils": "^2.0.10"
+  },
+  "devDependencies": {
+      "coffee-script": "^1.10.0",
+      "gulp": "^3.9.1",
+      "gulp-coffee": "^2.3.1",
+      "gulp-jasmine": "^2.3.0",
+      "jasmine-reporters": "^2.1.1"
+  }
+}
