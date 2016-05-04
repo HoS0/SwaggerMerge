@@ -23,7 +23,8 @@
   },
   "homepage": "https://github.com/HoS0/SwaggerMerge#readme",
   "dependencies": {
-    "swagger2-utils": "^2.0.10"
+    "swagger2-utils": "^2.0.10",
+    "coffee-script": "^1.10.0"
   },
   "devDependencies": {
       "coffee-script": "^1.10.0",
