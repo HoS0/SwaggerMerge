@@ -1,0 +1,110 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.1.0",
+        "title": "Zettabox HoS Admin",
+        "description": "administration API for zettabox service\n"
+    },
+    "host": "test.com",
+    "basePath": "/zbadmin",
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "securitylogin": {
+            "type": "basic",
+            "description": "username:password"
+        },
+        "securitytoken": {
+            "type": "basic",
+            "description": "registeredUserId:token"
+        }
+    },
+    "paths": {
+        "/login": {
+            "post": {
+                "security": [
+                    {
+                        "securitylogin": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "token and registration id info",
+                        "schema": {
+                            "$ref": "#/definitions/Token"
+                        }
+                    },
+                    "403": {
+                        "description": "You do not have necessary permissions for the resource"
+                    }
+                }
+            },
+            "get": {
+                "security": [
+                    {
+                        "securitytoken": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "valid token and registered id"
+                    },
+                    "403": {
+                        "description": "You do not have necessary permissions for the resource"
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "security": [
+                    {
+                        "securitytoken": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "email string, have regex",
+                        "default": "%@mail.com",
+                        "type": "string",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List all users",
+                        "schema": {
+                            "$ref": "#/definitions/Token"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Token": {
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string"
+                },
+                "registeredUserId": {
+                    "type": "string"
+                },
+                "expration": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
