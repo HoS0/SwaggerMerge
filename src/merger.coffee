@@ -58,6 +58,14 @@ mergedDefinitions = (swaggers) ->
 
 module.exports = () ->
     merge: (swaggers, info, basePath, host)->
+        if typeof info isnt 'object'
+            throw 'no info object as input or different format'
+
+        if typeof basePath isnt 'string'
+            throw 'no basePath string as input or different format'
+
+        if typeof host isnt 'string'
+            throw 'no host string as input or different format'
         ret =
             swagger: "2.0"
             info: info

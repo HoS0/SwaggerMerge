@@ -10,8 +10,13 @@ merging multiple swagger 2.0 JSONs into one JSON
 var swaggermerge = require('swagger-merge')
 var swaggerOne = require('./swagger1.json')
 var swaggerTwo = require('./swagger2.json')
+var info = {
+    version: "0.0.1",
+    title: "merged swaggers",
+    description: "all mighty services merged together\n"
+}
 
-var merged = swaggermerge.merge([swaggerOne, swaggerTwo]);
+merged = swaggermerge.merge([swaggerOne, swaggerTwo], info, '/api', 'test.com')
 ```
 
 ## Running Tests
