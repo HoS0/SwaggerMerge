@@ -42,6 +42,7 @@ mergedPaths = (swaggers) ->
     ret = {}
     for swagger in swaggers
         if swagger.paths
+            swagger.basePath ?= ''
             for key in Object.keys(swagger.paths)
                 if !ret[swagger.basePath+key]
                     ret[swagger.basePath+key] = swagger.paths[key]
