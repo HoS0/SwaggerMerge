@@ -1,6 +1,6 @@
 {
   "name": "swagger-merge",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "merging multiple swagger 2.0 JSONs into one JSON.",
   "main": "index.js",
   "scripts": {
