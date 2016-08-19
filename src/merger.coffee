@@ -58,7 +58,7 @@ mergedDefinitions = (swaggers) ->
     return ret
 
 module.exports = () ->
-    merge: (swaggers, info, basePath, host)->
+    merge: (swaggers, info, basePath, host, schemes)->
         if typeof info isnt 'object'
             throw 'no info object as input or different format'
 
@@ -73,7 +73,7 @@ module.exports = () ->
             host: host
             basePath: basePath
             securityDefinitions: mergeSecurityDefinitions(swaggers)
-            schemes: mergedSchemes(swaggers)
+            schemes: schemes || mergedSchemes(swaggers)
             consumes: mergedConsume(swaggers)
             produces: mergedProduces(swaggers)
             paths: mergedPaths(swaggers)

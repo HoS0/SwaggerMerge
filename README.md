@@ -15,8 +15,9 @@ var info = {
     title: "merged swaggers",
     description: "all mighty services merged together\n"
 }
+var schemes = ['http']
 
-merged = swaggermerge.merge([swaggerOne, swaggerTwo], info, '/api', 'test.com')
+merged = swaggermerge.merge([swaggerOne, swaggerTwo], info, '/api', 'test.com', schemes)
 ```
 
 ## Running Tests

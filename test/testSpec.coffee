@@ -21,6 +21,18 @@ describe "Run swagger merge", ()->
         expect(swagger.validate(merged)).toBe(true)
         done()
 
+    it "and merge two simple swaggers and rewrite schemes", (done)->
+        info =
+            version: "0.0.1",
+            title: "merged swaggers",
+            description: "all mighty services merged together\n"
+
+        merged = swaggermerge.merge([swaggerOne, swaggerTwo, swaggerThree], info, '/api', 'test.com', ['http'])
+        expect(swagger.validate(merged)).toBe(true)
+        expect(merged.schemes.length).toBe(1)
+        expect(merged.schemes[0]).toBe('http')
+        done()
+
     it "merge swagger with no basePath", (done)->
         info =
             version: "0.0.1",
