@@ -47,3 +47,17 @@ describe "Run swagger merge", ()->
         expect(swagger.validate(merged)).toBe(true)
         expect(Object.keys(merged.paths)[0].startsWith('undefined')).toBe(false)
         done()
+
+    it "merge swagger with no basePath", (done)->
+        info =
+            version: "0.0.1",
+            title: "merged swaggers",
+            description: "all mighty services merged together\n"
+
+        delete swaggerOne.securityDefinitions
+        delete swaggerTwo.securityDefinitions
+        delete swaggerThree.securityDefinitions
+
+        merged = swaggermerge.merge([swaggerOne, swaggerTwo, swaggerThree], info, '/api', 'test.com')
+        expect(swagger.validate(merged)).toBe(true)
+        done()

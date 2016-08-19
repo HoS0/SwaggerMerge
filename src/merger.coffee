@@ -1,8 +1,9 @@
 mergeSecurityDefinitions = (swaggers) ->
-    ret = {}
+    ret = undefined
     for swagger in swaggers
         if swagger.securityDefinitions
             for key in Object.keys(swagger.securityDefinitions)
+                ret ?= {}
                 ret[key] = swagger.securityDefinitions[key]
 
     return ret
@@ -39,20 +40,22 @@ mergedProduces = (swaggers) ->
     return ret
 
 mergedPaths = (swaggers) ->
-    ret = {}
+    ret = undefined
     for swagger in swaggers
         if swagger.paths
             swagger.basePath ?= ''
             for key in Object.keys(swagger.paths)
+                ret ?= {}
                 if !ret[swagger.basePath+key]
                     ret[swagger.basePath+key] = swagger.paths[key]
     return ret
 
 mergedDefinitions = (swaggers) ->
-    ret = {}
+    ret = undefined
     for swagger in swaggers
         if swagger.definitions
             for key in Object.keys(swagger.definitions)
+                ret ?= {}
                 if !ret[key]
                     ret[key] = swagger.definitions[key]
     return ret
@@ -67,14 +70,23 @@ module.exports = () ->
 
         if typeof host isnt 'string'
             throw 'no host string as input or different format'
+
         ret =
             swagger: "2.0"
             info: info
             host: host
             basePath: basePath
-            securityDefinitions: mergeSecurityDefinitions(swaggers)
             schemes: schemes || mergedSchemes(swaggers)
             consumes: mergedConsume(swaggers)
             produces: mergedProduces(swaggers)
-            paths: mergedPaths(swaggers)
-            definitions: mergedDefinitions(swaggers)
+
+        securityDefinitions = mergeSecurityDefinitions(swaggers)
+        ret.securityDefinitions = securityDefinitions if securityDefinitions
+
+        definitions = mergedDefinitions(swaggers)
+        ret.definitions = definitions if definitions
+
+        paths = mergedPaths(swaggers)
+        ret.paths = paths if paths
+
+        return ret
