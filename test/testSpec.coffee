@@ -1,10 +1,19 @@
-swaggermerge = require('../index')
-swaggerOne = require('./swagger1')
-swaggerTwo = require('./swagger2')
-swaggerThree = require('./swagger3')
 swagger = require('swagger2-utils');
 
 describe "Run swagger merge", ()->
+    swaggerOne = {}
+    swaggerTwo = {}
+    swaggerThree = {}
+    swaggermerge = {}
+
+    beforeEach (done)->
+      swaggerOne = JSON.parse(JSON.stringify(require('./swagger1')))
+      swaggerTwo = JSON.parse(JSON.stringify(require('./swagger2')))
+      swaggerThree = JSON.parse(JSON.stringify(require('./swagger3')))
+
+      swaggermerge = require('../index')
+      done()
+
     it "and load any verify two swagger json", (done)->
         expect(swagger.validate(swaggerOne)).toBe(true)
         expect(swagger.validate(swaggerTwo)).toBe(true)
@@ -61,3 +70,46 @@ describe "Run swagger merge", ()->
         merged = swaggermerge.merge([swaggerOne, swaggerTwo, swaggerThree], info, '/api', 'test.com')
         expect(swagger.validate(merged)).toBe(true)
         done()
+
+    it "merge swagger with collision paths", (done)->
+        info =
+            version: "0.0.1",
+            title: "merged swaggers",
+            description: "all mighty services merged together\n"
+
+        swaggerOne.paths = JSON.parse JSON.stringify swaggerTwo.paths
+        swaggerOne.basePath = swaggerTwo.basePath
+
+        swaggermerge.on 'warn', (msg)=>
+          done()
+
+        merged = swaggermerge.merge([swaggerOne, swaggerTwo, swaggerThree], info, '/api', 'test.com')
+        expect(swagger.validate(merged)).toBe(true)
+
+    it "merge swagger with collision definitions", (done)->
+        info =
+            version: "0.0.1",
+            title: "merged swaggers",
+            description: "all mighty services merged together\n"
+
+        swaggerOne.definitions = JSON.parse JSON.stringify swaggerTwo.definitions
+
+        swaggermerge.on 'warn', (msg)=>
+          done()
+
+        merged = swaggermerge.merge([swaggerOne, swaggerTwo, swaggerThree], info, '/api', 'test.com')
+        expect(swagger.validate(merged)).toBe(true)
+
+    it "merge swagger with collision definitions", (done)->
+        info =
+            version: "0.0.1",
+            title: "merged swaggers",
+            description: "all mighty services merged together\n"
+
+        swaggerOne.securityDefinitions = JSON.parse JSON.stringify swaggerThree.securityDefinitions
+
+        swaggermerge.on 'warn', (msg)=>
+          done()
+
+        merged = swaggermerge.merge([swaggerOne, swaggerTwo, swaggerThree], info, '/api', 'test.com')
+        expect(swagger.validate(merged)).toBe(true)

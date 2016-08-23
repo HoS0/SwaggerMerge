@@ -2,4 +2,5 @@
 'use strict';
 require('coffee-script/register');
 
-module.exports = require('./bootstrap');
+var merger = require('./bootstrap')
+module.exports = new merger();

@@ -17,6 +17,10 @@ var info = {
 }
 var schemes = ['http']
 
+swaggermerge.on('warn', function (msg) {
+    console.log(msg)
+})
+
 merged = swaggermerge.merge([swaggerOne, swaggerTwo], info, '/api', 'test.com', schemes)
 ```
 
