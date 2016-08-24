@@ -1,6 +1,3 @@
-/* jshint node:true */
-'use strict';
-require('coffee-script/register');
-
-var merger = require('./bootstrap')
-module.exports = new merger();
+'use strict'
+var merger = require('./src')
+module.exports = merger;

@@ -100,7 +100,7 @@ describe "Run swagger merge", ()->
         merged = swaggermerge.merge([swaggerOne, swaggerTwo, swaggerThree], info, '/api', 'test.com')
         expect(swagger.validate(merged)).toBe(true)
 
-    it "merge swagger with collision definitions", (done)->
+    it "merge swagger with collision security definitions", (done)->
         info =
             version: "0.0.1",
             title: "merged swaggers",
