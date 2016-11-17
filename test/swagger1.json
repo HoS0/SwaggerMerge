@@ -61,11 +61,7 @@
         "/user/{userId}": {
             "get": {
                 "parameters": [{
-                    "name": "userId",
-                    "in": "path",
-                    "type": "string",
-                    "description": "ID of the user",
-                    "required": true
+                    "$ref": "#/parameters/userId"
                 }],
                 "responses": {
                     "200": {
@@ -73,16 +69,15 @@
                         "schema": {
                             "$ref": "#/definitions/User"
                         }
+                    },
+                    "404": {
+                        "$ref": "#/responses/UserNotFoundError"
                     }
                 }
             },
             "put": {
                 "parameters": [{
-                    "name": "userId",
-                    "in": "path",
-                    "type": "string",
-                    "description": "ID of the user",
-                    "required": true
+                    "$ref": "#/parameters/userId"
                 }],
                 "responses": {
                     "200": {
@@ -90,16 +85,15 @@
                         "schema": {
                             "$ref": "#/definitions/User"
                         }
+                    },
+                    "404": {
+                        "$ref": "#/responses/UserNotFoundError"
                     }
                 }
             },
             "delete": {
                 "parameters": [{
-                    "name": "userId",
-                    "in": "path",
-                    "type": "string",
-                    "description": "ID of the user",
-                    "required": true
+                    "$ref": "#/parameters/userId"
                 }],
                 "responses": {
                     "200": {
@@ -107,6 +101,9 @@
                         "schema": {
                             "$ref": "#/definitions/User"
                         }
+                    },
+                    "404": {
+                        "$ref": "#/responses/UserNotFoundError"
                     }
                 }
             }
@@ -141,6 +138,31 @@
                 },
                 "email": {
                     "type": "string"
+                }
+            }
+        }
+    },
+    "parameters": {
+        "userId": {
+            "name": "userId",
+            "in": "path",
+            "type": "string",
+            "description": "ID of the user",
+            "required": true
+        }
+    },
+    "responses": {
+        "UserNotFoundError": {
+            "description": "User Not Found Error",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
                 }
             }
         }
