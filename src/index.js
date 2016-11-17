@@ -76,8 +76,9 @@ class Merger extends EventEmitter {
     for (let i = 0; i < swaggers.length; i++) {
       let swagger = swaggers[i];
       if (swagger.paths) {
-        if (swagger.basePath == null) {
-          swagger.basePath = '';
+        let pathPrefix = '';
+        if (!!swagger.basePath && swagger.basePath !== '/') {
+          pathPrefix = swagger.basePath;
         }
         let ref = Object.keys(swagger.paths);
         for (let j = 0; j < ref.length; j++) {
@@ -85,8 +86,8 @@ class Merger extends EventEmitter {
           if (ret == null) {
             ret = {};
           }
-          if (!ret[swagger.basePath + key]) {
-            ret[swagger.basePath + key] = swagger.paths[key];
+          if (!ret[pathPrefix + key]) {
+            ret[pathPrefix + key] = swagger.paths[key];
           } else {
             this.emit("warn", "multiple routes with the same name and base path has define in swagger collection: " + (swagger.basePath + key));
           }
