@@ -116,8 +116,35 @@ class Merger extends EventEmitter {
     }
     return ret;
   }
+  _mergedParameters(swaggers) {
+    return this._mergedFieldObject(swaggers, 'parameters');
+  }
+  _mergedResponses(swaggers) {
+    return this._mergedFieldObject(swaggers, 'responses');
+  }
+  _mergedFieldObject(swaggers, field) {
+    let ret = null;
+    for (let i = 0; i < swaggers.length; i++) {
+      let swagger = swaggers[i];
+      if (swagger[field]) {
+        let ref = Object.keys(swagger[field]);
+        for (let j = 0; j < ref.length; j++) {
+          let key = ref[j];
+          if (ret == null) {
+            ret = {};
+          }
+          if (!ret[key]) {
+            ret[key] = swagger[field][key];
+          } else {
+            this.emit("warn", "multiple " + field + " with the same name has define in swagger collection: " + key);
+          }
+        }
+      }
+    }
+    return ret;
+  }
   merge(swaggers, info, basePath, host, schemes) {
-    let definitions, paths, ret, securityDefinitions;
+    let definitions, parameters, paths, responses, ret, securityDefinitions;
     if (typeof info !== 'object') {
       throw 'no info object as input or different format';
     }
@@ -147,6 +174,14 @@ class Merger extends EventEmitter {
     paths = this._mergedPaths(swaggers);
     if (paths) {
       ret.paths = paths;
+    }
+    parameters = this._mergedParameters(swaggers);
+    if (parameters) {
+      ret.parameters = parameters;
+    }
+    responses = this._mergedResponses(swaggers);
+    if (responses) {
+      ret.responses = responses;
     }
     return ret;
   }
