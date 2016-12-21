@@ -141,3 +141,16 @@ describe "Run swagger merge", ()->
 
         merged = swaggermerge.merge([swaggerOne, swaggerTwo, swaggerThree], info, '/api', 'test.com')
         expect(swagger.validate(merged)).toBe(true)
+    it "merge swagger with tags", (done)->
+        info = 
+            version: "0.0.1",
+            title: "merged swaggers",
+            description: "all mighty services merged together\n"
+        swaggerOne.responses = JSON.parse JSON.stringify swaggerTwo.responses
+
+        swaggermerge.on 'warn', (msg)=>
+            done()
+
+        merged = swaggermerge.merge([swaggerOne, swaggerTwo, swaggerThree], info, '/api', 'test.com')
+        expect(swagger.validate(merged)).toBe(true)
+        expect(merged.tags).not.toBeNull()
