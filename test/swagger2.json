@@ -23,6 +23,12 @@
   "produces": [
     "application/json"
   ],
+  "tags": [
+    {
+      "name": "Pets",
+      "description": "Pets go here"
+    }
+  ],
   "paths": {
     "/pets": {
       "get": {

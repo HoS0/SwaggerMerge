@@ -16,6 +16,12 @@
     "produces": [
         "application/json"
     ],
+    "tags": [
+        {
+            "name": "Users",
+            "description": "Users go here"
+        }
+    ],
     "paths": {
         "/users": {
             "get": {
