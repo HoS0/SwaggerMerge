@@ -17,6 +17,12 @@
     "produces": [
         "application/json"
     ],
+    "tags": [
+        {
+            "name": "Security",
+            "description": "Security goes here"
+        }
+    ],
     "securityDefinitions": {
         "securitylogin": {
             "type": "basic",

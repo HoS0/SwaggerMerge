@@ -23,6 +23,22 @@ class Merger extends EventEmitter {
     }
     return ret;
   }
+  _mergedTags(swaggers) {
+    let ret = [];
+    for (let i = 0; i < swaggers.length; i++) {
+      let swagger = swaggers[i];
+      if (swagger.tags) {
+        let ref = swagger.tags;
+        for (let j = 0; j < ref.length; j++) {
+          let tag = ref[j];
+          if (tag && ret.indexOf(tag) < 0) {
+            ret.push(tag);
+          }
+        }
+      }
+    }
+    return ret;
+  }
   _mergedSchemes(swaggers) {
     let ret = [];
     for (let i = 0; i < swaggers.length; i++) {
@@ -162,7 +178,8 @@ class Merger extends EventEmitter {
       basePath: basePath,
       schemes: schemes || this._mergedSchemes(swaggers),
       consumes: this._mergedConsume(swaggers),
-      produces: this._mergedProduces(swaggers)
+      produces: this._mergedProduces(swaggers),
+      tags: this._mergedTags(swaggers)
     };
     securityDefinitions = this._mergeSecurityDefinitions(swaggers);
     if (securityDefinitions) {
