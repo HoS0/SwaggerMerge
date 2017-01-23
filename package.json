@@ -4,7 +4,7 @@
   "description": "merging multiple swagger 2.0 JSONs into one JSON.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
