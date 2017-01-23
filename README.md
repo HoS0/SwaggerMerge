@@ -1,4 +1,6 @@
-# swagger-merge
+
+
+# swagger-merge [![Build Status](https://travis-ci.org/HoS0/SwaggerMerge.svg?branch=master)](https://travis-ci.org/HoS0/SwaggerMerge)
 
 merging multiple swagger 2.0 JSONs into one JSON
 
