@@ -1,6 +1,8 @@
 
 
-# swagger-merge [![Build Status](https://travis-ci.org/HoS0/SwaggerMerge.svg?branch=master)](https://travis-ci.org/HoS0/SwaggerMerge) [![Coverage Status](https://coveralls.io/repos/github/HoS0/SwaggerMerge/badge.svg?branch=master)](https://coveralls.io/github/HoS0/SwaggerMerge?branch=master)
+# swagger-merge
+
+[![Build Status](https://travis-ci.org/HoS0/SwaggerMerge.svg?branch=master)](https://travis-ci.org/HoS0/SwaggerMerge) [![Coverage Status](https://coveralls.io/repos/github/HoS0/SwaggerMerge/badge.svg?branch=master)](https://coveralls.io/github/HoS0/SwaggerMerge?branch=master)
 
 merging multiple swagger 2.0 JSONs into one JSON
 
