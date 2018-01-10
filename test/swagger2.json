@@ -12,6 +12,8 @@
       "name": "MIT"
     }
   },
+  "x-extension-2": "correct-2",
+  "x-extension-1b": "wrong-should-not-be-here-1b",
   "host": "test.com",
   "basePath": "/petstore",
   "schemes": [

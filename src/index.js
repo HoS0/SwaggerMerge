@@ -133,6 +133,21 @@ class Merger extends EventEmitter {
     }
     return ret;
   }
+  _mergedExtensions(swaggers) {
+    let ret = {};
+    for (let i = 0; i < swaggers.length; i++) {
+      let swagger = swaggers[i];
+      let extensionNames = Object.keys(swagger).filter(key => key.startsWith('x-'))
+      for (let j = 0; j < extensionNames.length; j++) {
+        let extensionName = extensionNames[j];
+        let extension = swagger[extensionName];
+        if (extension && !ret[extensionName]) {
+          ret[extensionName] = extension;
+        }
+      }
+    }
+    return ret;
+  }
   _mergedParameters(swaggers) {
     return this._mergedFieldObject(swaggers, 'parameters');
   }
@@ -161,7 +176,7 @@ class Merger extends EventEmitter {
     return ret;
   }
   merge(swaggers, info, basePath, host, schemes) {
-    let definitions, parameters, paths, responses, ret, securityDefinitions;
+    let definitions, parameters, paths, responses, ret, securityDefinitions, extensions;
     if (typeof info !== 'object') {
       throw 'no info object as input or different format';
     }
@@ -200,6 +215,12 @@ class Merger extends EventEmitter {
     responses = this._mergedResponses(swaggers);
     if (responses) {
       ret.responses = responses;
+    }
+    extensions = this._mergedExtensions(swaggers);
+    if (extensions) {
+      Object.keys(extensions).forEach(key => {
+        ret[key] = extensions[key];
+      })
     }
     return ret;
   }

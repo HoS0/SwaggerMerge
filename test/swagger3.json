@@ -5,6 +5,8 @@
         "title": "Zettabox HoS Admin",
         "description": "administration API for zettabox service\n"
     },
+    "x-extension-3": "correct-3",
+    "x-extension-1b": "wrong-should-not-be-here-1b",
     "host": "test.com",
     "basePath": "/zbadmin",
     "schemes": [
