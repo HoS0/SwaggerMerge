@@ -5,6 +5,8 @@
         "title": "User service",
         "description": "User Management and Authentication service"
     },
+    "x-extension-1": "correct-1",
+    "x-extension-1b": "correct-1b",
     "host": "test.com",
     "basePath": "/user",
     "schemes": [
